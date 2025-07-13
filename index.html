@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DrawQards</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="container">
+
+  <h1 class="logo">DrawQards</h1>
+
+  <!-- Login Section -->
+  <section id="loginSection" class="section active">
+    <input type="text" id="usernameInput" placeholder="Enter username" autocomplete="off" />
+    <button id="loginBtn">Login / Register</button>
+    <div id="loginMsg" class="message"></div>
+  </section>
+
+  <!-- Main Game Section -->
+  <section id="gameSection" class="section">
+
+    <!-- User Info + Level Bar -->
+    <div id="userInfo">
+      <div>Welcome, <span id="displayUsername"></span></div>
+      <div>Gold: <span id="goldCount">0</span> 🪙</div>
+      <div>Level: <span id="levelCount">1</span></div>
+      <div class="xpBarContainer">
+        <div id="xpBar" class="xpBar"></div>
+      </div>
+    </div>
+
+    <!-- Draw Card -->
+    <button id="drawCardBtn">Draw Card 🎴</button>
+    <div id="drawResult" class="cardDisplay"></div>
+
+    <!-- Deck with multipliers -->
+    <h3>Your Deck</h3>
+    <div id="deckContainer" class="deckGrid"></div>
+
+    <!-- Sections Tabs -->
+    <div class="bottom-nav">
+      <button data-section="gameSection" class="active">Game</button>
+      <button data-section="vaultSection">Vault</button>
+      <button data-section="leaderboardSection">Leaderboard</button>
+      <button data-section="profileSection">Profile</button>
+    </div>
+
+  </section>
+
+  <!-- Vault Section -->
+  <section id="vaultSection" class="section">
+    <h2>Vault</h2>
+    <p>Store your gold for 1 day and earn 15% interest.</p>
+    <input type="number" id="vaultAmount" min="1" placeholder="Amount to store" />
+    <button id="storeVaultBtn">Store Gold</button>
+    <div id="vaultMsg" class="message"></div>
+    <button class="backBtn" data-section="gameSection">Back</button>
+  </section>
+
+  <!-- Leaderboard Section -->
+  <section id="leaderboardSection" class="section">
+    <h2>Leaderboard</h2>
+    <ol id="leaderboardList"></ol>
+    <button class="backBtn" data-section="gameSection">Back</button>
+  </section>
+
+  <!-- Profile Section -->
+  <section id="profileSection" class="section">
+    <h2>Profile</h2>
+    <p><strong>Username:</strong> <span id="profileUsername"></span></p>
+    <p><strong>Gold:</strong> <span id="profileGold"></span></p>
+    <p><strong>Cards Drawn:</strong> <span id="profileCardsDrawn"></span></p>
+    <p><strong>Level:</strong> <span id="profileLevel"></span></p>
+    <button class="backBtn" data-section="gameSection">Back</button>
+  </section>
+
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
