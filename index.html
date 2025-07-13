@@ -9,6 +9,29 @@
 <body>
   <div class="container">
     <div id="xp-bar"><span id="xp-text">XP: 0</span><div id="xp-fill"></div></div>
+      
+   <!-- Login Section -->
+<div id="login" class="section active">
+  <h2>Login</h2>
+  <input id="login-username" placeholder="Username">
+  <input id="login-password" placeholder="Password" type="password">
+  <button onclick="loginUser()">Login</button>
+</div>
+
+<!-- Register Section -->
+<div id="register" class="section">
+  <h2>Register</h2>
+  <input id="register-username" placeholder="Username">
+  <input id="register-password" placeholder="Password" type="password">
+  <button onclick="registerUser()">Register</button>
+</div>
+
+<!-- Draw Section -->
+<div id="draw" class="section">
+  <h2>🎴 Draw Cards</h2>
+  <p>Welcome <span id="player-name"></span>!</p>
+  <!-- Card content goes here -->
+</div>
 
     <div id="draw-section" class="section active">
       <h2>Draw Cards</h2>
