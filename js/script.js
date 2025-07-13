@@ -1,4 +1,4 @@
-const API_URL = 'https://ishan999.pythonanywhere.com/'; // Change if needed
+
 
 // State
 let currentUser = null;
