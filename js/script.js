@@ -1,54 +1,55 @@
-const API = "https://ishan999.pythonanywhere.com"; // your backend URL
-
-async function loginUser() {
-  const username = document.getElementById("login-username").value;
-  const password = document.getElementById("login-password").value;
-
-  try {
-    const res = await fetch(`${API}/login`, {
-      method: "POST",
-      credentials: "include", // important for session cookie
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ username, password })
-    });
-
-    const data = await res.json();
-
-    if (res.ok) {
-      alert("✅ Login successful!");
-      // Optional: redirect or update UI
-    } else {
-      alert("❌ " + data.error);
-    }
-  } catch (err) {
-    alert("❌ Network error: " + err.message);
-  }
-}
+const API_URL = "https://ishan999.pythonanywhere.com";
 
 async function registerUser() {
   const username = document.getElementById("register-username").value;
   const password = document.getElementById("register-password").value;
 
   try {
-    const res = await fetch(`${API}/register`, {
+    const res = await fetch(`${API_URL}/register`, {
       method: "POST",
-      credentials: "include",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, password })
+      credentials: "include",
+      body: JSON.stringify({ username, password }),
     });
 
     const data = await res.json();
-
     if (res.ok) {
-      alert("✅ Registered successfully!");
+      alert(data.message);
     } else {
-      alert("❌ " + data.error);
+      alert(data.error || "Registration failed");
     }
   } catch (err) {
-    alert("❌ Network error: " + err.message);
+    console.error("Register Error:", err);
+    alert("Network error during registration.");
+  }
+}
+
+async function loginUser() {
+  const username = document.getElementById("login-username").value;
+  const password = document.getElementById("login-password").value;
+
+  try {
+    const res = await fetch(`${API_URL}/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ username, password }),
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      alert("Login successful!");
+      console.log(data.user); // optional
+      // Optionally redirect to game page
+    } else {
+      alert(data.error || "Login failed");
+    }
+  } catch (err) {
+    console.error("Login Error:", err);
+    alert("Network error during login.");
   }
 }
