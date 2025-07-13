@@ -1,4 +1,4 @@
-const API_URL = 'https://ishan999.pythonanywhere.com/api';
+const API_URL = 'https://ishan999.pythonanywhere.com/api/';
 
 async function login() {
   const username = document.getElementById('username-input').value.trim();
