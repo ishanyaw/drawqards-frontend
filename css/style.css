@@ -1,230 +1,155 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
-
 * {
-  margin: 0; padding: 0; box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-  background: #f0f2f5;
+  background: #f0f4f8;
   color: #222;
   min-height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 30px 15px 70px;
-}
-
-.container {
-  background: white;
-  width: 400px;
-  max-width: 95vw;
-  border-radius: 15px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-  padding: 25px 30px;
-  display: flex;
   flex-direction: column;
-  gap: 30px;
+  align-items: center;
+  padding: 1rem;
 }
 
 header {
-  display: flex; justify-content: space-between; align-items: center;
-}
-
-header h2 {
-  font-weight: 700;
-  font-size: 1.5rem;
-  color: #3498db;
-}
-
-header button {
-  background: #e74c3c;
-  padding: 8px 15px;
-  border-radius: 8px;
-  border: none;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-header button:hover {
-  background: #c0392b;
-}
-
-#xp-bar {
-  background: #ddd;
-  border-radius: 12px;
-  height: 16px;
-  overflow: hidden;
-  margin-bottom: 10px;
-}
-
-#xp-fill {
-  background: #3498db;
-  height: 100%;
-  width: 0%;
-  transition: width 0.5s ease;
-}
-
-nav {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 10px;
-}
-
-nav button {
-  flex-grow: 1;
-  background: none;
-  border: none;
-  font-weight: 600;
-  font-size: 1rem;
-  padding: 10px 0;
-  cursor: pointer;
-  border-bottom: 3px solid transparent;
-  transition: border-color 0.3s;
-  color: #555;
-}
-
-nav button.active,
-nav button:hover {
-  border-bottom: 3px solid #3498db;
-  color: #3498db;
-}
-
-.section {
-  display: none;
-}
-
-.section.active {
-  display: block;
-}
-
-button {
-  background: #3498db;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.3s ease;
-  margin-top: 10px;
-}
-
-button:hover {
-  background: #217dbb;
-}
-
-#auth-section input {
-  display: block;
   width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
-}
-
-#auth-section input:focus {
-  outline: none;
-  border-color: #3498db;
-}
-
-#auth-message {
-  margin-top: 10px;
-  height: 20px;
-  font-weight: 600;
-  text-align: center;
-}
-
-#draw-result {
-  margin-top: 15px;
-  font-weight: 700;
-  color: #444;
-  min-height: 30px;
-}
-
-/* Deck list styling */
-#deck-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-height: 250px;
-  overflow-y: auto;
-  padding-right: 5px;
-}
-
-#deck-list div {
-  background: #e8f0fe;
-  padding: 10px 15px;
-  border-radius: 12px;
+  max-width: 900px;
+  margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-weight: 600;
-  color: #222;
 }
 
-#deck-list div button {
-  background: #e67e22;
-  padding: 5px 10px;
-  font-size: 0.9rem;
-  border-radius: 8px;
-  margin-left: 10px;
+h1 {
+  color: #4a90e2;
+}
+
+nav button {
+  background: #4a90e2;
+  border: none;
+  color: white;
+  margin-left: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
   transition: background 0.3s ease;
 }
 
-#deck-list div button:hover {
-  background: #ca6e17;
+nav button:hover {
+  background: #357abd;
 }
 
-/* Vault */
-#vault-section p {
-  font-weight: 700;
-  font-size: 1.2rem;
-  color: #27ae60;
-}
-
-/* Leaderboard */
-#leaderboard-list {
-  list-style: none;
-  max-height: 200px;
-  overflow-y: auto;
-  padding-left: 15px;
-}
-
-#leaderboard-list li {
-  padding: 8px 0;
-  border-bottom: 1px solid #eee;
-  font-weight: 600;
-  color: #555;
-}
-
-/* Scrollbar styling for deck and leaderboard */
-#deck-list::-webkit-scrollbar,
-#leaderboard-list::-webkit-scrollbar {
-  width: 6px;
-}
-
-#deck-list::-webkit-scrollbar-thumb,
-#leaderboard-list::-webkit-scrollbar-thumb {
-  background-color: #3498db;
+main {
+  background: white;
   border-radius: 12px;
+  max-width: 900px;
+  width: 100%;
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
 }
 
-#deck-list::-webkit-scrollbar-track,
-#leaderboard-list::-webkit-scrollbar-track {
-  background-color: #f0f2f5;
+.auth-form {
+  margin-bottom: 2rem;
+  max-width: 400px;
 }
 
-/* Responsive tweaks */
-@media (max-width: 450px) {
-  .container {
-    width: 95vw;
-    padding: 20px;
-  }
+.auth-form input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  margin: 0.4rem 0 1rem 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.auth-form button {
+  background: #4a90e2;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1.1rem;
+  transition: background 0.3s ease;
+}
+
+.auth-form button:hover {
+  background: #357abd;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#deck-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.card {
+  background: #e1e8f7;
+  border-radius: 8px;
+  padding: 0.75rem;
+  width: 100px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  user-select: none;
+}
+
+.card h4 {
+  margin-bottom: 0.3rem;
+  text-transform: capitalize;
+}
+
+button.shop-item {
+  background: #50c878;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 0.5rem;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+button.shop-item:hover {
+  background: #3ea060;
+}
+
+/* Inputs */
+input, select {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+/* Buttons */
+button {
+  cursor: pointer;
+  user-select: none;
+}
+
+#draw-result, #sell-result, #shop-message, #trade-result {
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #444;
+}
+
+/* Scrollable friends list */
+#friends-list {
+  max-height: 150px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
 }
