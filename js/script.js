@@ -1,4 +1,4 @@
-const API_URL = "https://ishan999.pythonanywhere.com";
+const API_URL = "https://ishan999.pythonanywhere.com/api/";
 
 async function registerUser() {
   const username = document.getElementById("register-username").value;
