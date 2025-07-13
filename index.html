@@ -2,86 +2,91 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DrawQards</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DrawQards Login</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .login-container {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.2);
+    }
+    .login-container h2 {
+      margin-bottom: 1rem;
+    }
+    .login-container input {
+      width: 100%;
+      padding: 0.7rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    .login-container button {
+      width: 100%;
+      padding: 0.7rem;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .message {
+      margin-top: 1rem;
+      color: red;
+    }
+  </style>
 </head>
 <body>
-  <div class="container" id="app">
-    <div id="auth-section">
-      <h2>Welcome! Please login or register.</h2>
-      <input type="text" id="username-input" placeholder="Username" />
-      <input type="password" id="password-input" placeholder="Password" />
-      <button id="login-btn">Login</button>
-      <button id="register-btn">Register</button>
-      <div id="auth-message"></div>
-    </div>
 
-    <div id="main-section" style="display:none;">
-      <header>
-        <h2>Hello, <span id="user-name-display"></span>!</h2>
-        <button id="logout-btn">Logout</button>
-      </header>
-      <div id="xp-bar">
-        <div id="xp-fill" style="width: 0%"></div>
-      </div>
-
-      <nav>
-        <button class="nav-btn active" data-section="draw-section">Draw</button>
-        <button class="nav-btn" data-section="deck-section">Deck</button>
-        <button class="nav-btn" data-section="vault-section">Vault</button>
-        <button class="nav-btn" data-section="leaderboard-section">Leaderboard</button>
-      </nav>
-
-      <section id="draw-section" class="section active">
-        <h3>Draw a Card</h3>
-        <button id="draw-btn">Draw Now</button>
-        <div id="draw-result"></div>
-      </section>
-
-      <section id="deck-section" class="section" style="display:none;">
-        <h3>Your Deck</h3>
-        <div id="deck-list"></div>
-      </section>
-
-      <section id="vault-section" class="section" style="display:none;">
-        <h3>Your Vault</h3>
-        <p>Coins: <span id="coin-count">0</span></p>
-      </section>
-
-      <section id="leaderboard-section" class="section" style="display:none;">
-        <h3>Leaderboard</h3>
-        <ul id="leaderboard-list"></ul>
-      </section>
-    </div>
+  <div class="login-container">
+    <h2>Login to DrawQards</h2>
+    <input type="text" id="username" placeholder="Username"/>
+    <input type="password" id="password" placeholder="Password"/>
+    <button onclick="login()">Login</button>
+    <div class="message" id="message"></div>
   </div>
 
-  <script src="js/script.js"></script>
   <script>
-    // Navigation buttons event
-    document.querySelectorAll('.nav-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+    const API = "https://ishan999.pythonanywhere.com"; // make sure it's HTTPS
 
-        const section = btn.getAttribute('data-section');
-        document.querySelectorAll('.section').forEach(sec => {
-          sec.style.display = 'none';
-          sec.classList.remove('active');
-        });
-        const activeSection = document.getElementById(section);
-        if (activeSection) {
-          activeSection.style.display = 'block';
-          activeSection.classList.add('active');
-        }
+    async function login() {
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      const messageBox = document.getElementById("message");
+
+      const res = await fetch(`${API}/login`, {
+        method: "POST",
+        credentials: "include", // IMPORTANT for session cookies
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ username, password })
       });
-    });
 
-    // Hook buttons to rea login/register/logout/draw functions
-    document.getElementById('login-btn').addEventListener('click', login);
-    document.getElementById('register-btn').addEventListener('click', register);
-    document.getElementById('logout-btn').addEventListener('click', logout);
-    document.getElementById('draw-btn').addEventListener('click', drawCard);
+      const data = await res.json();
+
+      if (res.ok) {
+        messageBox.style.color = "green";
+        messageBox.textContent = data.message;
+        console.log("Logged in user:", data.user);
+
+        // Optional: redirect or load user profile
+        // window.location.href = "/dashboard.html";
+      } else {
+        messageBox.style.color = "red";
+        messageBox.textContent = data.error || "Login failed";
+        console.error("Login error:", data);
+      }
+    }
   </script>
+
 </body>
 </html>
