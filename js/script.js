@@ -1,7 +1,7 @@
 from js import document, fetch
 import json
 
-API_URL = 'https://ishan999.pythonanywhere.com/'
+API_URL = 'https://ishan999.pythonanywhere.com/api/'
 currentUser = None
 
 def qs(selector):
