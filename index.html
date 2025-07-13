@@ -6,61 +6,91 @@
   <title>DrawQards</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
-
-   <button id="register-btn">Register</button>
-<button id="login-btn">Login</button>
-<button id="logout-btn">Logout</button>
-<button id="draw-btn">Draw Card</button>
-
-    <body>           
+<body>
   <div class="container" id="app">
     <div id="auth-section">
-      <h2>MAINTAINANCE, please return after 7 to 8 pm nepal time.</h2>
+      <h2>MAINTENANCE, please return after 7 to 8 pm Nepal time.</h2>
       <input type="text" id="username-input" placeholder="DONOT ATTEMPT TO LOGIN OR REGISTER" />
       <input type="password" id="password-input" placeholder="DONOT ATTEMPT TO LOGIN OR REGISTER" />
-      <button onclick="login()">CURRENTLY ON MAINTAINANCE</button>
-      <button onclick="register()">CURRENTLY ON MAINTAINANCE</button>
+      <button id="login-btn" disabled>CURRENTLY ON MAINTENANCE</button>
+      <button id="register-btn" disabled>CURRENTLY ON MAINTENANCE</button>
       <div id="auth-message"></div>
     </div>
 
     <div id="main-section" style="display:none;">
       <header>
         <h2>Hello, <span id="user-name-display"></span>!</h2>
-        <button onclick="logout()">Logout</button>
+        <button id="logout-btn">Logout</button>
       </header>
       <div id="xp-bar">
         <div id="xp-fill" style="width: 0%"></div>
       </div>
 
       <nav>
-        <button onclick="showSection('draw-section')" class="active">Draw</button>
-        <button onclick="showSection('deck-section')">Deck</button>
-        <button onclick="showSection('vault-section')">Vault</button>
-        <button onclick="showSection('leaderboard-section')">Leaderboard</button>
+        <button class="nav-btn active" data-section="draw-section">Draw</button>
+        <button class="nav-btn" data-section="deck-section">Deck</button>
+        <button class="nav-btn" data-section="vault-section">Vault</button>
+        <button class="nav-btn" data-section="leaderboard-section">Leaderboard</button>
       </nav>
 
       <section id="draw-section" class="section active">
         <h3>Draw a Card</h3>
-        <button onclick="drawCard()">Draw Now</button>
+        <button id="draw-btn">Draw Now</button>
         <div id="draw-result"></div>
       </section>
 
-      <section id="deck-section" class="section">
+      <section id="deck-section" class="section" style="display:none;">
         <h3>Your Deck</h3>
         <div id="deck-list"></div>
       </section>
 
-      <section id="vault-section" class="section">
+      <section id="vault-section" class="section" style="display:none;">
         <h3>Your Vault</h3>
         <p>Coins: <span id="coin-count">0</span></p>
       </section>
 
-      <section id="leaderboard-section" class="section">
+      <section id="leaderboard-section" class="section" style="display:none;">
         <h3>Leaderboard</h3>
         <ul id="leaderboard-list"></ul>
       </section>
     </div>
   </div>
+
   <script src="js/script.js"></script>
+  <script>
+    // Navigation buttons event
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const section = btn.getAttribute('data-section');
+        document.querySelectorAll('.section').forEach(sec => {
+          sec.style.display = 'none';
+          sec.classList.remove('active');
+        });
+        const activeSection = document.getElementById(section);
+        if (activeSection) {
+          activeSection.style.display = 'block';
+          activeSection.classList.add('active');
+        }
+      });
+    });
+
+    // Button event listeners for auth and draw
+    // Disabled now because maintenance
+    document.getElementById('login-btn').addEventListener('click', () => {
+      alert('Login disabled due to maintenance.');
+    });
+    document.getElementById('register-btn').addEventListener('click', () => {
+      alert('Register disabled due to maintenance.');
+    });
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      alert('Logout disabled due to maintenance.');
+    });
+    document.getElementById('draw-btn').addEventListener('click', () => {
+      alert('Draw disabled due to maintenance.');
+    });
+  </script>
 </body>
 </html>
