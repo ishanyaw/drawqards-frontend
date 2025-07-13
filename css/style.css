@@ -10,21 +10,29 @@
 }
 
 body {
-  background-color: #f4f6f8;
-  color: #222;
+  background: #f0f2f5;
   min-height: 100vh;
-  padding-bottom: 80px;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
+  padding: 30px 15px 70px;
+  color: #222;
 }
 
 .container {
-  width: 400px;
-  max-width: 95vw;
-  padding: 20px;
-  margin-top: 10px;
+  background: white;
+  width: 420px;
+  border-radius: 15px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  padding: 25px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  min-height: 600px;
+  position: relative;
 }
 
+/* Sections */
 .section {
   display: none;
   flex-direction: column;
@@ -34,72 +42,168 @@ body {
   display: flex;
 }
 
+input {
+  padding: 10px;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
 button {
   padding: 12px;
-  border: none;
   background: #3498db;
+  border: none;
   color: white;
-  border-radius: 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
-  font-weight: bold;
-  transition: background 0.2s ease;
+  transition: background-color 0.25s ease;
 }
 button:hover {
   background: #2980b9;
 }
 
+button:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+.link {
+  color: #3498db;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.error {
+  color: #e74c3c;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.level-bar {
+  background: #ddd;
+  border-radius: 15px;
+  height: 30px;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+.xp-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #3498db, #2980b9);
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  line-height: 30px;
+  border-radius: 15px 0 0 15px;
+  transition: width 0.5s ease;
+}
+
+#draw-result {
+  margin-top: 15px;
+  min-height: 80px;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.card-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.card {
+  border: 2px solid #ccc;
+  border-radius: 15px;
+  padding: 10px;
+  min-width: 90px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  transition: border-color 0.3s ease;
+}
+
+.card:hover {
+  border-color: #3498db;
+}
+
+.card.rarity-common {
+  border-color: #7f8c8d;
+}
+.card.rarity-rare {
+  border-color: #2980b9;
+}
+.card.rarity-legendary {
+  border-color: #e67e22;
+}
+.card.rarity-mythic {
+  border-color: #8e44ad;
+}
+.card.rarity-rainbow {
+  border-image-slice: 1;
+  border-width: 3px;
+  border-style: solid;
+  border-image-source: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+}
+
+.card .stack-count {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #3498db;
+  color: white;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+}
+
+/* Bottom Navigation Bar */
 .bottom-nav {
   position: fixed;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  display: flex;
   background: white;
-  border-top: 1px solid #ddd;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  display: flex;
+  justify-content: space-around;
   width: 100%;
   max-width: 420px;
-  justify-content: space-around;
   padding: 10px 0;
-  z-index: 100;
+  user-select: none;
+  z-index: 1000;
+  border-top: 1.5px solid #ddd;
+  gap: 6px;
 }
+
 .bottom-nav button {
-  flex: 1;
   background: none;
-  color: #444;
-  border-radius: 0;
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #34495e;
+  padding: 10px 0;
+  cursor: pointer;
+  flex-grow: 1;
+  transition: color 0.25s ease;
+  margin: 0 4px;
 }
 
-#xp-bar {
-  background: #ddd;
-  border-radius: 20px;
-  height: 20px;
-  margin-bottom: 15px;
-  position: relative;
-}
-#xp-fill {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #4caf50, #8bc34a);
-  border-radius: 20px;
-  transition: width 0.3s ease;
-}
-#xp-text {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 12px;
-  color: #000;
+.bottom-nav button.active,
+.bottom-nav button:hover {
+  color: #3498db;
 }
 
-.card {
-  background: white;
-  padding: 15px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  margin-top: 10px;
-  position: relative;
-}
-.card.rainbow {
-  background: linear-gradient(45deg, red, orange, yellow, green, blue, violet);
-  color: white;
+button:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }
