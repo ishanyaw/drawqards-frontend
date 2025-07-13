@@ -1,4 +1,4 @@
-const API_URL = "https://ishan999.pythonanywhere.com/api/";
+const API_URL = "https://ishan999.pythonanywhere.com";  // ← No /api/
 
 async function registerUser() {
   const username = document.getElementById("register-username").value;
@@ -10,7 +10,7 @@ async function registerUser() {
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
+      credentials: "include",  // Important for session
       body: JSON.stringify({ username, password }),
     });
 
@@ -36,15 +36,15 @@ async function loginUser() {
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
+      credentials: "include",  // Needed for session cookies
       body: JSON.stringify({ username, password }),
     });
 
     const data = await res.json();
     if (res.ok) {
       alert("Login successful!");
-      console.log(data.user); // optional
-      // Optionally redirect to game page
+      console.log(data.user);  // Optional debug
+      // Redirect or show logged-in UI here
     } else {
       alert(data.error || "Login failed");
     }
