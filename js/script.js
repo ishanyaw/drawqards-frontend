@@ -208,3 +208,30 @@ def clearUI():
 from pyodide.ffi import create_proxy
 import asyncio
 asyncio.ensure_future(init())
+
+from pyodide.ffi import create_proxy
+
+# Bind buttons after DOM is ready
+def bind_buttons():
+    login_btn = qs('#login-btn')
+    register_btn = qs('#register-btn')
+    logout_btn = qs('#logout-btn')
+    draw_btn = qs('#draw-btn')
+
+    if login_btn:
+        login_btn.addEventListener('click', create_proxy(login))
+    if register_btn:
+        register_btn.addEventListener('click', create_proxy(register))
+    if logout_btn:
+        logout_btn.addEventListener('click', create_proxy(logout))
+    if draw_btn:
+        draw_btn.addEventListener('click', create_proxy(drawCard))
+
+# Run bind_buttons after page load
+import asyncio
+async def main():
+    await asyncio.sleep(1)  # Wait for DOM to be ready
+    bind_buttons()
+    await init()
+
+asyncio.ensure_future(main())
