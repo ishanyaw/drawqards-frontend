@@ -29,76 +29,7 @@ function showSection(id) {
 }
 
 // Auth functions
-async function login() {
-  const username = qs('#username-input').value.trim();
-  const password = qs('#password-input').value.trim();
-  if (!username || !password) {
-    showMessage('#auth-message', 'Please enter username and password', true);
-    return;
-  }
-  try {
-    const res = await fetch(`${API_URL}/login`, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({username, password})
-    });
-    const data = await res.json();
-    if (res.ok) {
-      currentUser = data.user;
-      afterLogin();
-      showMessage('#auth-message', 'Login successful!');
-    } else {
-      showMessage('#auth-message', data.error || 'Login failed', true);
-    }
-  } catch(e) {
-    showMessage('#auth-message', 'Network error', true);
-  }
-}
-
-async function register() {
-  const username = qs('#username-input').value.trim();
-  const password = qs('#password-input').value.trim();
-  if (!username || !password) {
-    showMessage('#auth-message', 'Please enter username and password', true);
-    return;
-  }
-  try {
-    const res = await fetch(`${API_URL}/register`, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({username, password})
-    });
-    const data = await res.json();
-    if (res.ok) {
-      showMessage('#auth-message', 'Registration successful! You can now login.');
-    } else {
-      showMessage('#auth-message', data.error || 'Registration failed', true);
-    }
-  } catch(e) {
-    showMessage('#auth-message', 'Network error', true);
-  }
-}
-
-async function logout() {
-  await fetch(`${API_URL}/logout`, {
-    method: 'POST',
-    credentials: 'include'
-  });
-  currentUser = null;
-  qs('#main-section').style.display = 'none';
-  qs('#auth-section').style.display = 'block';
-  qs('#username-input').value = '';
-  qs('#password-input').value = '';
-  showMessage('#auth-message', 'Logged out');
-  clearUI();
-}
-
-// After login: load user data and show main UI
-async function afterLogin() {
-  qs('#auth-section').style.display = 'none';
-  qs('#main-section').style.display = 'block';
-  qs('#user-name-display').textContent = currentUser ? currentUser.username || 'Player' : 'Player';
+ qs('#user-name-display').textContent = currentUser ? currentUser.username || 'Player' : 'Player';
   updateXP(currentUser.xp, currentUser.level);
   await loadVault();
   await loadDeck();
