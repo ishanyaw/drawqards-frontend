@@ -1,30 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DrawQards</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DrawQards Revamp</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Welcome to DrawQards</h1>
 
-    <div class="auth-section">
-      <h2>Login</h2>
-      <input type="text" id="login-username" placeholder="Username" />
-      <input type="password" id="login-password" placeholder="Password" />
-      <button onclick="loginUser()">Login</button>
-    </div>
+  <header>
+    <h1>DrawQards</h1>
+    <nav id="navbar" style="display:none;">
+      <button data-view="dashboard">Dashboard</button>
+      <button data-view="deck">Deck</button>
+      <button data-view="vault">Vault</button>
+      <button data-view="shop">Shop</button>
+      <button data-view="leaderboard">Leaderboard</button>
+      <button data-view="trading">Trading</button>
+      <button data-view="profile">Profile</button>
+      <button id="logout-btn">Logout</button>
+    </nav>
+  </header>
 
-    <div class="auth-section">
-      <h2>Register</h2>
-      <input type="text" id="register-username" placeholder="Username" />
-      <input type="password" id="register-password" placeholder="Password" />
-      <button onclick="registerUser()">Register</button>
-    </div>
-  </div>
+  <main>
 
-  <script src="js/script.js"></script>
+    <!-- AUTH VIEWS -->
+    <section id="auth-view">
+
+      <div id="register-form" class="auth-form">
+        <h2>Register</h2>
+        <input id="register-username" placeholder="Username" />
+        <input id="register-password" type="password" placeholder="Password" />
+        <button id="register-btn">Register</button>
+      </div>
+
+      <div id="login-form" class="auth-form">
+        <h2>Login</h2>
+        <input id="login-username" placeholder="Username" />
+        <input id="login-password" type="password" placeholder="Password" />
+        <button id="login-btn">Login</button>
+      </div>
+
+    </section>
+
+    <!-- DASHBOARD -->
+    <section id="dashboard-view" class="hidden">
+      <h2>Welcome, <span id="user-name"></span>!</h2>
+      <p>XP: <span id="user-xp"></span> | Level: <span id="user-level"></span> | Coins: <span id="user-coins"></span></p>
+      <button id="draw-card-btn">Draw a Card</button>
+      <div id="draw-result"></div>
+    </section>
+
+    <!-- DECK -->
+    <section id="deck-view" class="hidden">
+      <h2>Your Deck</h2>
+      <div id="deck-cards"></div>
+      <div id="sell-section" class="hidden">
+        <h3>Sell Cards</h3>
+        <select id="sell-card-select"></select>
+        <input id="sell-qty" type="number" min="1" value="1" />
+        <button id="sell-btn">Sell</button>
+        <div id="sell-result"></div>
+      </div>
+    </section>
+
+    <!-- VAULT -->
+    <section id="vault-view" class="hidden">
+      <h2>Vault</h2>
+      <p>Coins: <span id="vault-coins"></span></p>
+    </section>
+
+    <!-- SHOP -->
+    <section id="shop-view" class="hidden">
+      <h2>Shop - Buy Boosters</h2>
+      <div id="shop-items">
+        <!-- Example boosters -->
+        <button class="shop-item" data-item="booster1" data-price="50">Booster 1 - 50 coins</button>
+        <button class="shop-item" data-item="booster2" data-price="100">Booster 2 - 100 coins</button>
+      </div>
+      <div id="shop-message"></div>
+    </section>
+
+    <!-- LEADERBOARD -->
+    <section id="leaderboard-view" class="hidden">
+      <h2>Leaderboard</h2>
+      <ol id="leaderboard-list"></ol>
+    </section>
+
+    <!-- TRADING -->
+    <section id="trading-view" class="hidden">
+      <h2>Trading</h2>
+      <div id="friends-list"></div>
+      <div id="trade-offer-section" class="hidden">
+        <h3>Send Trade Offer</h3>
+        <select id="trade-friend-select"></select>
+        <select id="trade-card-select"></select>
+        <input id="trade-qty" type="number" min="1" value="1" />
+        <button id="send-trade-btn">Send Trade Offer</button>
+        <div id="trade-result"></div>
+      </div>
+      <div id="incoming-trades"></div>
+    </section>
+
+    <!-- PROFILE -->
+    <section id="profile-view" class="hidden">
+      <h2>Profile</h2>
+      <p>Username: <span id="profile-username"></span></p>
+      <p>XP: <span id="profile-xp"></span></p>
+      <p>Level: <span id="profile-level"></span></p>
+      <!-- Add more profile details or editing here -->
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
