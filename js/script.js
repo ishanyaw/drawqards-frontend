@@ -40,6 +40,60 @@ function drawCard() {
   document.getElementById("card-display").innerHTML = cardHTML;
 }
 
+const apiBase = "https://ishan999.pythonanywhere.com";
+
+// Login function
+async function loginUser() {
+  const username = document.getElementById("login-username").value.trim();
+  const password = document.getElementById("login-password").value.trim();
+
+  if (!username || !password) return alert("Please fill all fields");
+
+  const res = await fetch(`${apiBase}/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username, password })
+  });
+
+  const data = await res.json();
+  if (data.success) {
+    alert("Logged in!");
+    localStorage.setItem("username", username);
+    showSection("draw");
+  } else {
+    alert(data.message || "Login failed");
+  }
+}
+
+// Register function
+async function registerUser() {
+  const username = document.getElementById("register-username").value.trim();
+  const password = document.getElementById("register-password").value.trim();
+
+  if (!username || !password) return alert("Please fill all fields");
+
+  const res = await fetch(`${apiBase}/register`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username, password })
+  });
+
+  const data = await res.json();
+  if (data.success) {
+    alert("Registered successfully!");
+    localStorage.setItem("username", username);
+    showSection("draw");
+  } else {
+    alert(data.message || "Registration failed");
+  }
+}
+
+// Utility to show sections
+function showSection(id) {
+  document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
 function addToDeck(card) {
   let key = card.name;
   deck[key] = (deck[key] || 0) + 1;
